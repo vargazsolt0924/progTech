@@ -1,8 +1,7 @@
-package org.example;
+package hu.nye.progTech.wumpus;
 
 public class Main {
     public static void main(String[] args) {
-
         System.out.println("Hello world!");
     }
 }

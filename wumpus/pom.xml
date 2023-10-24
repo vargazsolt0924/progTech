@@ -50,7 +50,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        hu.nye.progtech.sudoku.Main
+                                        hu.nye.progTech.wumpus.Main
                                     </mainClass>
                                 </manifest>
                             </archive>
@@ -72,8 +72,8 @@
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>hu/nye/progtech/sudoku/Main.*</exclude>
-                        <exclude>hu/nye/progtech/sudoku/model/*</exclude>
+                        <exclude>hu/nye/progTech/wumpus/Main.*</exclude>
+                        <exclude>hu/nye/progTech/wumpus/model/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

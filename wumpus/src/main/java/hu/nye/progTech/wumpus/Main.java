@@ -1,12 +1,17 @@
 package hu.nye.progTech.wumpus;
 
-import hu.nye.progTech.wumpus.service.Map.BufferReaderMap;
+import hu.nye.progTech.wumpus.model.HeroVo;
+import hu.nye.progTech.wumpus.service.Map.BufferedMapReader;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Menu.User;
-import hu.nye.progTech.wumpus.service.controller.GameController;
+import hu.nye.progTech.wumpus.service.Map.MapWriter;
+import hu.nye.progTech.wumpus.service.exception.MapReaderException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -20,7 +25,8 @@ public class Main {
         System.out.println("Szia " + username + "!");
 
         Menu menu = new Menu();
-        GameController game = new GameController();
+        MapWriter game = new MapWriter();
+        HeroVo hero = new HeroVo("",0 ,"",0,0);
 
         boolean isGameReady = false;
 
@@ -59,8 +65,20 @@ public class Main {
                     isGameReady = true;
                     break;
                 case 2:
-                    // Fájlból beolvasás
+                    InputStream inputStream = Main.class.getClassLoader().getResource("map/wumpuszinput.txt").openStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                    BufferedMapReader mapReader = new BufferedMapReader(bufferedReader, hero);
+
+                    try {
+                        List<String> mapData = mapReader.readMap();
+
+                        game.mapPrinter(mapData);
+                    } catch (MapReaderException e) {
+                        System.out.println("Hiba történt a pálya beolvasása közben: " + e.getMessage());
+                    }
+                    System.out.println("Ennyi íjjal rendelkezik jelenleg: " + hero.getArrows());
                     isGameReady = true;
+                    System.out.println("Kész a páyla beolvasás, ezután válazd ki a játék menüpontot és kezdődhet is a játék.");
                     break;
                 case 3:
                     // Adatbázisból betöltés
@@ -104,8 +122,8 @@ public class Main {
                                 case 6:
                                     // Feladás
                                     // Implementáld a feladás funkciót
-                                    System.out.println("Biztos vagy benne, hogy feladod?");
                                     inGameMenu = false;
+                                    menu.showMainMenu();
                                     break;
                                 default:
                                     System.out.println("Nem érvényes választás a játékmenüben. Kérem, válasszon újra.");
@@ -125,7 +143,7 @@ public class Main {
             }
         }
 
-        System.out.println("Kilépés a programból.");
+        System.out.println("Kilépés a játékból.");
     }
 }
 

@@ -2,7 +2,6 @@ package hu.nye.progTech.wumpus.service.Map;
 
 import hu.nye.progTech.wumpus.model.MapVo;
 
-import java.util.List;
 
 public class MapWriter {
 

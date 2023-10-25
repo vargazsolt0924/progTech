@@ -7,15 +7,20 @@ import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Menu.User;
 import hu.nye.progTech.wumpus.service.Map.MapWriter;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.Scanner;
 
+
 public class Main {
+
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
@@ -57,7 +62,7 @@ public class Main {
                                 menu.showMainMenu();
                                 break;
                             default:
-                                System.out.println("Nem érvényes választás a játékmenüben. Kérem, válasszon újra.");
+                                System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
                                 break;
                         }
                     }
@@ -73,11 +78,11 @@ public class Main {
                         MapWriter mapWriter = new MapWriter();
                         mapWriter.mapPrinter(mapData);
 
-                        System.out.println("Kész a pálya beolvasás, ezután válassza ki a játék menüpontot és kezdhet is a játék.");
                     } catch (MapReaderException e) {
-                        System.out.println("Hiba történt a pálya beolvasása közben: " + e.getMessage());
+                       // System.out.println("Hiba történt a pálya beolvasása közben: " + e.getMessage());
+                        logger.error("Hiba történt a pálya beolvasása közben:",e);
                     }
-                    System.out.println("Ennyi íjjal rendelkezik jelenleg: " + hero.getArrows());
+                    System.out.println("Ennyi íjjal rendelkezik jelenleg a hős: " + hero.getArrows());
                     isGameReady = true;
                     System.out.println("Kész a páyla beolvasás, ezután válazd ki a játék menüpontot és kezdődhet is a játék.");
                     break;
@@ -119,7 +124,7 @@ public class Main {
                                     menu.showMainMenu();
                                     break;
                                 default:
-                                    System.out.println("Nem érvényes választás a játékmenüben. Kérem, válasszon újra.");
+                                    System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
                                     break;
                             }
                         }
@@ -131,13 +136,15 @@ public class Main {
                     quit = true;
                     break;
                 default:
-                    System.out.println("Nem érvényes választás. Kérem, válasszon újra.");
+                    System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
                     break;
             }
         }
 
         System.out.println("Kilépés a játékból.");
     }
+
+
 }
 
 

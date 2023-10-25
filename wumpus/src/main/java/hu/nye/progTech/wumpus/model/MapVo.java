@@ -8,15 +8,13 @@ public class MapVo {
     private final int numberOfRows;
     private final int numberOfColumns;
     private final String[][] map;
-    private String heroColumn;
-    private int heroRow;
+    private HeroVo heroVo;
 
-    public MapVo(int numberOfRows, int numberOfColumns, String[][] map, String heroColumn, int heroRow) {
+    public MapVo(int numberOfRows, int numberOfColumns, String[][] map, HeroVo heroVo) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.map = deepCopy(map);
-        this.heroColumn = heroColumn;
-        this.heroRow = heroRow;
+        this.heroVo = heroVo;
     }
 
     public int getNumberOfRows() {
@@ -31,20 +29,12 @@ public class MapVo {
         return deepCopy(map);
     }
 
-    public String getHeroColumn() {
-        return heroColumn;
+    public HeroVo getHeroVo() {
+        return heroVo;
     }
 
-    public int getHeroRow() {
-        return heroRow;
-    }
-
-    public void setHeroColumn(String heroColumn) {
-        this.heroColumn = heroColumn;
-    }
-
-    public void setHeroRow(int heroRow) {
-        this.heroRow = heroRow;
+    public void setHeroVo(HeroVo heroVo) {
+        this.heroVo = heroVo;
     }
 
     private String[][] deepCopy(String[][] map) {
@@ -67,9 +57,8 @@ public class MapVo {
 
         if (numberOfRows != mapVo.numberOfRows) return false;
         if (numberOfColumns != mapVo.numberOfColumns) return false;
-        if (heroRow != mapVo.heroRow) return false;
         if (!Arrays.deepEquals(map, mapVo.map)) return false;
-        return Objects.equals(heroColumn, mapVo.heroColumn);
+        return Objects.equals(heroVo, mapVo.heroVo);
     }
 
     @Override
@@ -77,8 +66,7 @@ public class MapVo {
         int result = numberOfRows;
         result = 31 * result + numberOfColumns;
         result = 31 * result + Arrays.deepHashCode(map);
-        result = 31 * result + (heroColumn != null ? heroColumn.hashCode() : 0);
-        result = 31 * result + heroRow;
+        result = 31 * result + (heroVo != null ? heroVo.hashCode() : 0);
         return result;
     }
 
@@ -88,9 +76,9 @@ public class MapVo {
         sb.append("numberOfRows=").append(numberOfRows);
         sb.append(", numberOfColumns=").append(numberOfColumns);
         sb.append(", map=").append(map == null ? "null" : Arrays.asList(map).toString());
-        sb.append(", heroColumn='").append(heroColumn).append('\'');
-        sb.append(", heroRow=").append(heroRow);
+        sb.append(", heroVo=").append(heroVo);
         sb.append('}');
         return sb.toString();
     }
 }
+

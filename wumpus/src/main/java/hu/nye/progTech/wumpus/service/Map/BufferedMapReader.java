@@ -29,26 +29,25 @@ public class BufferedMapReader implements MapReaderInterface {
             firstLine = bufferedReader.readLine();
             String[] firstLineParts = firstLine.split(" ");
             int size = Integer.parseInt(firstLineParts[0]);
-            hero.setColumn(firstLineParts[1]);
-            hero.setRow(Integer.parseInt(firstLineParts[2]));
-            hero.setDirection(firstLineParts[3]);
+            String heroColumn = (firstLineParts[1]);
+            int heroRow = (Integer.parseInt(firstLineParts[2]));
+            String direction = (firstLineParts[3]);
+
 
             while ((line = bufferedReader.readLine()) != null) {
                 result.add(line);
                 wumpusCounter += countWumpusInLine(line);
             }
 
-            hero.setArrows(wumpusCounter);
-            hero.setGold(0);
 
             // Helyesen hozz létre egy MapVo objektumot
             String[][] mapData = new String[result.size()][];
             for (int i = 0; i < result.size(); i++) {
                 mapData[i] = result.get(i).split(" ");
             }
-            MapVo mapVo = new MapVo(size, size, mapData, hero.getColumn(), hero.getRow());
 
-            return mapVo;
+            hero = new HeroVo(heroColumn,heroRow,direction,wumpusCounter,0);
+            return new MapVo(size, size, mapData, hero);
         } catch (IOException e) {
             throw new MapReaderException("Sikertelen térkép beolvasás");
         }

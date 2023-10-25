@@ -1,35 +1,50 @@
 package hu.nye.progTech.wumpus.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MapVo {
 
     private final int numberOfRows;
-    private final int getNumberOfColumns;
+    private final int numberOfColumns;
     private final String[][] map;
-    private final boolean[][] fixed;
+    private String heroColumn;
+    private int heroRow;
 
-    public MapVo(int numberOfRows, int getNumberOfColumns, String[][] map, boolean[][] fixed) {
+    public MapVo(int numberOfRows, int numberOfColumns, String[][] map, String heroColumn, int heroRow) {
         this.numberOfRows = numberOfRows;
-        this.getNumberOfColumns = getNumberOfColumns;
+        this.numberOfColumns = numberOfColumns;
         this.map = deepCopy(map);
-        this.fixed = deepCopy(fixed);
+        this.heroColumn = heroColumn;
+        this.heroRow = heroRow;
     }
 
     public int getNumberOfRows() {
         return numberOfRows;
     }
 
-    public int getGetNumberOfColumns() {
-        return getNumberOfColumns;
+    public int getNumberOfColumns() {
+        return numberOfColumns;
     }
 
     public String[][] getMap() {
         return deepCopy(map);
     }
 
-    public boolean[][] getFixed() {
-        return deepCopy(fixed);
+    public String getHeroColumn() {
+        return heroColumn;
+    }
+
+    public int getHeroRow() {
+        return heroRow;
+    }
+
+    public void setHeroColumn(String heroColumn) {
+        this.heroColumn = heroColumn;
+    }
+
+    public void setHeroRow(int heroRow) {
+        this.heroRow = heroRow;
     }
 
     private String[][] deepCopy(String[][] map) {
@@ -43,19 +58,6 @@ public class MapVo {
         return result;
     }
 
-    private boolean[][] deepCopy(boolean[][] fixed) {
-        boolean[][] result = new boolean[fixed.length][];
-
-        for (int i = 0; i < fixed.length; i++) {
-            result[i] = new boolean[fixed[i].length];
-            for (int j = 0; j < fixed[i].length; j++) {
-                result[i][j] = fixed[i][j];
-            }
-        }
-
-        return result;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,17 +66,19 @@ public class MapVo {
         MapVo mapVo = (MapVo) o;
 
         if (numberOfRows != mapVo.numberOfRows) return false;
-        if (getNumberOfColumns != mapVo.getNumberOfColumns) return false;
+        if (numberOfColumns != mapVo.numberOfColumns) return false;
+        if (heroRow != mapVo.heroRow) return false;
         if (!Arrays.deepEquals(map, mapVo.map)) return false;
-        return Arrays.deepEquals(fixed, mapVo.fixed);
+        return Objects.equals(heroColumn, mapVo.heroColumn);
     }
 
     @Override
     public int hashCode() {
         int result = numberOfRows;
-        result = 31 * result + getNumberOfColumns;
+        result = 31 * result + numberOfColumns;
         result = 31 * result + Arrays.deepHashCode(map);
-        result = 31 * result + Arrays.deepHashCode(fixed);
+        result = 31 * result + (heroColumn != null ? heroColumn.hashCode() : 0);
+        result = 31 * result + heroRow;
         return result;
     }
 
@@ -82,11 +86,11 @@ public class MapVo {
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapVo{");
         sb.append("numberOfRows=").append(numberOfRows);
-        sb.append(", getNumberOfColumns=").append(getNumberOfColumns);
+        sb.append(", numberOfColumns=").append(numberOfColumns);
         sb.append(", map=").append(map == null ? "null" : Arrays.asList(map).toString());
-        sb.append(", fixed=").append(fixed == null ? "null" : Arrays.asList(fixed).toString());
+        sb.append(", heroColumn='").append(heroColumn).append('\'');
+        sb.append(", heroRow=").append(heroRow);
         sb.append('}');
         return sb.toString();
     }
 }
-

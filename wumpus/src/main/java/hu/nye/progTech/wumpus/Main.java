@@ -1,6 +1,7 @@
 package hu.nye.progTech.wumpus;
 
 import hu.nye.progTech.wumpus.model.HeroVo;
+import hu.nye.progTech.wumpus.model.MapVo;
 import hu.nye.progTech.wumpus.service.Map.BufferedMapReader;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Menu.User;
@@ -18,7 +19,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        // Felhasználó létrehozása
         System.out.print("Kérem, adjon meg egy felhasználónevet: ");
         String username = scanner.nextLine();
         User user = new User(username);
@@ -26,7 +26,7 @@ public class Main {
 
         Menu menu = new Menu();
         MapWriter game = new MapWriter();
-        HeroVo hero = new HeroVo("",0 ,"",0,0);
+        HeroVo hero = new HeroVo("", 0, "", 0, 0);
 
         boolean isGameReady = false;
 
@@ -39,7 +39,6 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Pályaszerkesztés
-                    // Implementáld a pályaszerkesztés funkciót
                     boolean inGameEditorMenu = true;
                     int gameChoiceAtEditorMenu;
                     menu.showGameEditorMenu();
@@ -70,9 +69,11 @@ public class Main {
                     BufferedMapReader mapReader = new BufferedMapReader(bufferedReader, hero);
 
                     try {
-                        List<String> mapData = mapReader.readMap();
+                        MapVo mapData = mapReader.readMap();
+                        MapWriter mapWriter = new MapWriter();
+                        mapWriter.mapPrinter(mapData);
 
-                        game.mapPrinter(mapData);
+                        System.out.println("Kész a pálya beolvasás, ezután válassza ki a játék menüpontot és kezdhet is a játék.");
                     } catch (MapReaderException e) {
                         System.out.println("Hiba történt a pálya beolvasása közben: " + e.getMessage());
                     }
@@ -82,12 +83,10 @@ public class Main {
                     break;
                 case 3:
                     // Adatbázisból betöltés
-                    // Implementáld az adatbázisból betöltés funkciót
                     isGameReady = true;
                     break;
                 case 4:
                     // Adatbázisba mentés
-                    // Implementáld az adatbázisba mentés funkciót
                     break;
                 case 5:
                     if (isGameReady) {
@@ -101,27 +100,21 @@ public class Main {
                             switch (gameChoice) {
                                 case 1:
                                     // Lépés
-                                    // Implementáld a lépés funkciót
                                     break;
                                 case 2:
                                     // Fordulás jobbra
-                                    // Implementáld a fordulás jobbra funkciót
                                     break;
                                 case 3:
                                     // Fordulás balra
-                                    // Implementáld a fordulás balra funkciót
                                     break;
                                 case 4:
                                     // Nyíl lövés
-                                    // Implementáld a nyíl lövés funkciót
                                     break;
                                 case 5:
                                     // Arany felszedése
-                                    // Implementáld az arany felszedés funkciót
                                     break;
                                 case 6:
                                     // Feladás
-                                    // Implementáld a feladás funkciót
                                     inGameMenu = false;
                                     menu.showMainMenu();
                                     break;

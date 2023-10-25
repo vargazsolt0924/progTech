@@ -1,6 +1,7 @@
 package hu.nye.progTech.wumpus.service.Map;
 
 import hu.nye.progTech.wumpus.model.HeroVo;
+import hu.nye.progTech.wumpus.model.MapVo;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
 
 import java.io.BufferedReader;
@@ -19,7 +20,7 @@ public class BufferedMapReader implements MapReaderInterface {
     }
 
     @Override
-    public List<String> readMap() throws MapReaderException {
+    public MapVo readMap() throws MapReaderException {
         String line;
         List<String> result = new ArrayList<>();
         String firstLine;
@@ -39,10 +40,18 @@ public class BufferedMapReader implements MapReaderInterface {
 
             hero.setArrows(wumpusCounter);
             hero.setGold(0);
+
+            // Helyesen hozz létre egy MapVo objektumot
+            String[][] mapData = new String[result.size()][];
+            for (int i = 0; i < result.size(); i++) {
+                mapData[i] = result.get(i).split(" ");
+            }
+            MapVo mapVo = new MapVo(size, size, mapData, hero.getColumn(), hero.getRow());
+
+            return mapVo;
         } catch (IOException e) {
             throw new MapReaderException("Sikertelen térkép beolvasás");
         }
-        return result;
     }
 
     private int countWumpusInLine(String line) {

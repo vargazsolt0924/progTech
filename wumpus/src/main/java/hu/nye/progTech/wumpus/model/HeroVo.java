@@ -17,6 +17,9 @@ public class HeroVo implements HeroInterface {
         this.gold = gold;
     }
 
+    public HeroVo() {
+    }
+
     public int getRow() {
         return row;
     }

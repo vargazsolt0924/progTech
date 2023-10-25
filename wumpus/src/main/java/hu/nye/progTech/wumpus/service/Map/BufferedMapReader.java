@@ -33,7 +33,6 @@ public class BufferedMapReader implements MapReaderInterface {
             int heroRow = (Integer.parseInt(firstLineParts[2]));
             String direction = (firstLineParts[3]);
 
-
             while ((line = bufferedReader.readLine()) != null) {
                 result.add(line);
                 wumpusCounter += countWumpusInLine(line);

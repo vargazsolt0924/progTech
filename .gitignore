@@ -24,8 +24,8 @@ hs_err_pid*
 replay_pid*
 
 # IDE specific files
-.idea
+/.idea/
 
 #Files generated during translation
-wumpus/target
+/wumpus/target/
 

@@ -2,12 +2,3 @@
 /shelf/
 /workspace.xml
 
-# IDE specific files
-.idea/
-.vscode/
-
-#Files generated during translation
-/target/
-/bin/
-/build/
-

@@ -24,10 +24,8 @@ hs_err_pid*
 replay_pid*
 
 # IDE specific files
-.idea/
-.vscode/
+.idea
 
 #Files generated during translation
-/target/
-/bin/
-/build/
+wumpus/target
+

@@ -3,41 +3,44 @@ package hu.nye.progTech.wumpus.model;
 import java.util.Arrays;
 import java.util.Objects;
 
+
 public class MapVo {
 
-    private final int numberOfRows;
-    private final int numberOfColumns;
-    private final String[][] map;
+    private int size;
+    private char[][] map;
+    private HeroVo heroVo;
 
-    public MapVo(int numberOfRows, int numberOfColumns, String[][] map) {
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
-        this.map = deepCopy(map);
-
+    public MapVo(int size, char[][] map, HeroVo heroVo) {
+        this.size = size;
+        this.map = map;
+        this.heroVo = heroVo;
     }
 
-    public int getNumberOfRows() {
-        return numberOfRows;
+    public MapVo() {
     }
 
-    public int getNumberOfColumns() {
-        return numberOfColumns;
+    public HeroVo getHeroVo() {
+        return heroVo;
     }
 
-    public String[][] getMap() {
-        return deepCopy(map);
+    public int getSize() {
+        return size;
     }
 
+    public void setSize(int size) {
+        this.size = size;
+    }
 
-    private String[][] deepCopy(String[][] map) {
-        String[][] result = new String[map.length][];
-        for (int i = 0; i < map.length; i++) {
-            result[i] = new String[map[i].length];
-            for (int j = 0; j < map[i].length; j++) {
-                result[i][j] = map[i][j];
-            }
-        }
-        return result;
+    public char[][] getMap() {
+        return map;
+    }
+
+    public void setMap(char[][] map) {
+        this.map = map;
+    }
+
+    public void setHeroVo(HeroVo heroVo) {
+        this.heroVo = heroVo;
     }
 
     @Override
@@ -47,27 +50,26 @@ public class MapVo {
 
         MapVo mapVo = (MapVo) o;
 
-        if (numberOfRows != mapVo.numberOfRows) return false;
-        if (numberOfColumns != mapVo.numberOfColumns) return false;
-        return Arrays.deepEquals(map, mapVo.map);
+        if (size != mapVo.size) return false;
+        if (!Arrays.deepEquals(map, mapVo.map)) return false;
+        return Objects.equals(heroVo, mapVo.heroVo);
     }
 
     @Override
     public int hashCode() {
-        int result = numberOfRows;
-        result = 31 * result + numberOfColumns;
+        int result = size;
         result = 31 * result + Arrays.deepHashCode(map);
+        result = 31 * result + (heroVo != null ? heroVo.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("MapVo{");
-        sb.append("numberOfRows=").append(numberOfRows);
-        sb.append(", numberOfColumns=").append(numberOfColumns);
+        sb.append("size=").append(size);
         sb.append(", map=").append(map == null ? "null" : Arrays.asList(map).toString());
+        sb.append(", heroVo=").append(heroVo);
         sb.append('}');
         return sb.toString();
     }
 }
-

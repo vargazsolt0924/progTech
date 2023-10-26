@@ -7,8 +7,11 @@ import hu.nye.progTech.wumpus.service.Menu.GameMenuEngine;
 import hu.nye.progTech.wumpus.service.Menu.MapEditorMenuEngine;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Menu.User;
-import java.io.IOException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -18,6 +21,7 @@ public class Main {
 
         Menu menu = new Menu();
         HeroVo hero = new HeroVo();
+        MapVo map = null;
 
         boolean isGameReady = false;
         boolean quit = false;
@@ -35,8 +39,10 @@ public class Main {
                     break;
                 case 2:
                     MapManager mapManager = new MapManager();
-                    MapVo mapData = mapManager.readMap();
-                    mapManager.printMap(mapData);
+                    File file = new File("C:\\Users\\Varga Zsolt\\IdeaProjects\\progTech\\wumpus\\src\\main\\resources\\map\\wumpuszinput.txt");
+                    InputStream inputStream = new FileInputStream(file);
+                    map = mapManager.readMap(inputStream);
+                    mapManager.printMap(map);
                     System.out.println("A beolvasás megtörtént, most válaszd ki a játékmenüpontot(5) aztán már kezdődhet is a játék.");
                     System.out.println("Ennyi nyíllal rendelkezik a hős jelnleg: " + hero.getArrows());
                     isGameReady = true;

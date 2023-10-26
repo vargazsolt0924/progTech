@@ -3,13 +3,13 @@ package hu.nye.progTech.wumpus.model;
 import java.util.Objects;
 
 public class HeroVo implements HeroInterface {
-    private String column;
+    private char column;
     private int row;
-    private String direction;
+    private char direction;
     private int arrows;
     private int gold;
 
-    public HeroVo(String column, int row, String direction, int arrows, int gold) {
+    public HeroVo(char column, int row, char direction, int arrows, int gold) {
         this.column = column;
         this.row = row;
         this.direction = direction;
@@ -20,40 +20,41 @@ public class HeroVo implements HeroInterface {
     public HeroVo() {
     }
 
-    public int getRow() {
-        return row;
-    }
 
-    public String getColumn() {
+    public char getColumn() {
         return column;
     }
 
-    public String getDirection() {
-        return direction;
-    }
-
-    public int getArrows() {
-        return arrows;
-    }
-
-    public int getGold() {
-        return gold;
-    }
-
-    public void setColumn(String column) {
+    public void setColumn(char column) {
         this.column = column;
+    }
+
+    public int getRow() {
+        return row;
     }
 
     public void setRow(int row) {
         this.row = row;
     }
 
-    public void setDirection(String direction) {
+    public char getDirection() {
+        return direction;
+    }
+
+    public void setDirection(char direction) {
         this.direction = direction;
+    }
+
+    public int getArrows() {
+        return arrows;
     }
 
     public void setArrows(int arrows) {
         this.arrows = arrows;
+    }
+
+    public int getGold() {
+        return gold;
     }
 
     public void setGold(int gold) {
@@ -92,18 +93,18 @@ public class HeroVo implements HeroInterface {
 
         HeroVo heroVo = (HeroVo) o;
 
+        if (column != heroVo.column) return false;
         if (row != heroVo.row) return false;
+        if (direction != heroVo.direction) return false;
         if (arrows != heroVo.arrows) return false;
-        if (gold != heroVo.gold) return false;
-        if (!Objects.equals(column, heroVo.column)) return false;
-        return Objects.equals(direction, heroVo.direction);
+        return gold == heroVo.gold;
     }
 
     @Override
     public int hashCode() {
-        int result = column != null ? column.hashCode() : 0;
+        int result = column;
         result = 31 * result + row;
-        result = 31 * result + (direction != null ? direction.hashCode() : 0);
+        result = 31 * result + (int) direction;
         result = 31 * result + arrows;
         result = 31 * result + gold;
         return result;
@@ -112,9 +113,9 @@ public class HeroVo implements HeroInterface {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("HeroVo{");
-        sb.append("column='").append(column).append('\'');
+        sb.append("column=").append(column);
         sb.append(", row=").append(row);
-        sb.append(", direction='").append(direction).append('\'');
+        sb.append(", direction=").append(direction);
         sb.append(", arrows=").append(arrows);
         sb.append(", gold=").append(gold);
         sb.append('}');

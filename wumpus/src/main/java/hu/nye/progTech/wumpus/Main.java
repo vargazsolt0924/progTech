@@ -2,28 +2,21 @@ package hu.nye.progTech.wumpus;
 
 import hu.nye.progTech.wumpus.model.HeroVo;
 import hu.nye.progTech.wumpus.model.MapVo;
-import hu.nye.progTech.wumpus.service.Map.MapEditor;
 import hu.nye.progTech.wumpus.service.Map.MapManager;
 import hu.nye.progTech.wumpus.service.Menu.GameMenuEngine;
 import hu.nye.progTech.wumpus.service.Menu.MapEditorMenuEngine;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Menu.User;
-import hu.nye.progTech.wumpus.service.Map.MapWriter;
-
-
 import java.io.IOException;
-import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
 
         String username = User.getUsername();
         User.greetUser(username);
 
         Menu menu = new Menu();
-        MapWriter game = new MapWriter();
         HeroVo hero = new HeroVo();
 
         boolean isGameReady = false;
@@ -45,7 +38,7 @@ public class Main {
                     MapVo mapData = mapManager.readMap();
                     mapManager.printMap(mapData);
                     System.out.println("A beolvasás megtörtént, most válaszd ki a játékmenüpontot(5) aztán már kezdődhet is a játék.");
-                    System.out.println(" " + hero.getArrows());
+                    System.out.println("Ennyi nyíllal rendelkezik a hős jelnleg: " + hero.getArrows());
                     isGameReady = true;
                     break;
                 case 3:

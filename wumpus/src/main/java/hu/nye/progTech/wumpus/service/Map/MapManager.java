@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MapManager {
+public class MapManager{
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public MapVo readMap() throws IOException {
-        HeroVo hero = null;
-        InputStream inputStream = Main.class.getClassLoader().getResource("map/wumpuszinput.txt").openStream();
+        HeroVo hero = new HeroVo();
+        InputStream inputStream = Main.class.getClassLoader().getResource("Map/wumpuszinput.txt").openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         BufferedMapReader mapReader = new BufferedMapReader(bufferedReader, hero);
 

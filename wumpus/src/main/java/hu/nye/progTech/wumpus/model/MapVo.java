@@ -8,13 +8,12 @@ public class MapVo {
     private final int numberOfRows;
     private final int numberOfColumns;
     private final String[][] map;
-    private HeroVo heroVo;
 
-    public MapVo(int numberOfRows, int numberOfColumns, String[][] map, HeroVo heroVo) {
+    public MapVo(int numberOfRows, int numberOfColumns, String[][] map) {
         this.numberOfRows = numberOfRows;
         this.numberOfColumns = numberOfColumns;
         this.map = deepCopy(map);
-        this.heroVo = heroVo;
+
     }
 
     public int getNumberOfRows() {
@@ -29,13 +28,6 @@ public class MapVo {
         return deepCopy(map);
     }
 
-    public HeroVo getHeroVo() {
-        return heroVo;
-    }
-
-    public void setHeroVo(HeroVo heroVo) {
-        this.heroVo = heroVo;
-    }
 
     private String[][] deepCopy(String[][] map) {
         String[][] result = new String[map.length][];
@@ -57,8 +49,7 @@ public class MapVo {
 
         if (numberOfRows != mapVo.numberOfRows) return false;
         if (numberOfColumns != mapVo.numberOfColumns) return false;
-        if (!Arrays.deepEquals(map, mapVo.map)) return false;
-        return Objects.equals(heroVo, mapVo.heroVo);
+        return Arrays.deepEquals(map, mapVo.map);
     }
 
     @Override
@@ -66,7 +57,6 @@ public class MapVo {
         int result = numberOfRows;
         result = 31 * result + numberOfColumns;
         result = 31 * result + Arrays.deepHashCode(map);
-        result = 31 * result + (heroVo != null ? heroVo.hashCode() : 0);
         return result;
     }
 
@@ -76,7 +66,6 @@ public class MapVo {
         sb.append("numberOfRows=").append(numberOfRows);
         sb.append(", numberOfColumns=").append(numberOfColumns);
         sb.append(", map=").append(map == null ? "null" : Arrays.asList(map).toString());
-        sb.append(", heroVo=").append(heroVo);
         sb.append('}');
         return sb.toString();
     }

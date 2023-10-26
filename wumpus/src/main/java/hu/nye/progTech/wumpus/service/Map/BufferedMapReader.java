@@ -12,7 +12,7 @@ import java.util.List;
 public class BufferedMapReader implements MapReaderInterface {
 
     private final BufferedReader bufferedReader;
-    private HeroVo hero;
+    private final HeroVo hero;
 
     public BufferedMapReader(BufferedReader bufferedReader, HeroVo hero) {
         this.bufferedReader = bufferedReader;
@@ -21,44 +21,60 @@ public class BufferedMapReader implements MapReaderInterface {
 
     @Override
     public MapVo readMap() throws MapReaderException {
-        String line;
-        List<String> result = new ArrayList<>();
-        String firstLine;
-        int wumpusCounter = 0;
         try {
-            firstLine = bufferedReader.readLine();
+            String firstLine = bufferedReader.readLine();
             String[] firstLineParts = firstLine.split(" ");
+
+            if (firstLineParts.length != 4) {
+                throw new MapReaderException("Hibás első sor formátum: " + firstLine);
+            }
+
             int size = Integer.parseInt(firstLineParts[0]);
-            String heroColumn = (firstLineParts[1]);
-            int heroRow = (Integer.parseInt(firstLineParts[2]));
-            String direction = (firstLineParts[3]);
-
-            while ((line = bufferedReader.readLine()) != null) {
-                result.add(line);
-                wumpusCounter += countWumpusInLine(line);
-            }
-
-
-            // Helyesen hozz létre egy MapVo objektumot
-            String[][] mapData = new String[result.size()][];
-            for (int i = 0; i < result.size(); i++) {
-                mapData[i] = result.get(i).split(" ");
-            }
-
-            hero = new HeroVo(heroColumn,heroRow,direction,wumpusCounter,0);
-            return new MapVo(size, size, mapData, hero);
+            hero.setColumn(firstLineParts[1]);
+            hero.setRow(Integer.parseInt(firstLineParts[2]));
+            hero.setDirection(firstLineParts[3]);
+            hero.setGold(0);
+            List<String> mapData = mapSizeVerifier(size);
+            int wumpusCount = countWumpusInLine(mapData);
+            hero.setArrows(wumpusCount);
+            return createMap(size, mapData);
         } catch (IOException e) {
             throw new MapReaderException("Sikertelen térkép beolvasás");
         }
     }
 
-    private int countWumpusInLine(String line) {
+    private List<String> mapSizeVerifier(int size) throws IOException, MapReaderException {
+        List<String> mapData = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            String line = bufferedReader.readLine();
+            if (line == null || line.length() != size) {
+                throw new MapReaderException("Hibás sor formátum a pályán.");
+            }
+            mapData.add(line);
+        }
+        return mapData;
+    }
+
+    private int countWumpusInLine(List<String> mapData) {
         int count = 0;
-        for (char c : line.toCharArray()) {
-            if (c == 'U') {
-                count++;
+        for (String line : mapData) {
+            for (char c : line.toCharArray()) {
+                if (c == 'U') {
+                    count++;
+                }
             }
         }
         return count;
     }
+
+
+    private MapVo createMap(int size, List<String> mapData) {
+        String[][] mapDataArray = new String[size][size];
+        for (int i = 0; i < size; i++) {
+            mapDataArray[i] = mapData.get(i).split("");
+        }
+        return new MapVo(size, size, mapDataArray);
+    }
 }
+
+

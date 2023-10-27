@@ -13,22 +13,22 @@ import java.io.InputStreamReader;
 public class MapManager{
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-    public MapVO readMap(InputStream inputStream) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        BufferedMapReader mapReader = new BufferedMapReader(bufferedReader);
+   public MapVO readMap(InputStream inputStream) {
+       BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+       BufferedMapReader mapReader = new BufferedMapReader(bufferedReader);
 
-        try {
-            return mapReader.readMap(); // Most a MapVo objektumot adja vissza
-        } catch (MapReaderException e) {
-            logger.error("Valami hiba történt a pálya beolvasás közben!", e);
+       try {
+           return mapReader.readMap(); // Most a MapVo objektumot adja vissza
+       } catch (MapReaderException e) {
+          logger.error("Valami hiba történt a pálya beolvasás közben!", e);
             return null;
-        }
+       }
     }
 
-    public void printMap(MapVO mapVo) {
-        if (mapVo != null) {
+    public void printMap(MapVO mapVO) {
+        if (mapVO != null) {
             MapWriter mapWriter = new MapWriter();
-            mapWriter.mapPrinter(mapVo);
+            mapWriter.mapPrinter(mapVO);
         } else {
             System.out.println("Hiba történt a pálya beolvasása közben.");
         }

@@ -20,7 +20,6 @@ public class Main {
         User.greetUser(username);
 
         Menu menu = new Menu();
-        HeroVo hero = new HeroVo();
         MapVo map = null;
 
         boolean isGameReady = false;
@@ -44,7 +43,7 @@ public class Main {
                     map = mapManager.readMap(inputStream);
                     mapManager.printMap(map);
                     System.out.println("A beolvasás megtörtént, most válaszd ki a játékmenüpontot(5) aztán már kezdődhet is a játék.");
-                    System.out.println("Ennyi nyíllal rendelkezik a hős jelnleg: " + hero.getArrows());
+                    System.out.println("Ennyi nyíllal rendelkezik a hős jelnleg: " + map.getHeroVo().getArrows());
                     isGameReady = true;
                     break;
                 case 3:

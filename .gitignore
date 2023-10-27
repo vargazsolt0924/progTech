@@ -28,4 +28,5 @@ replay_pid*
 
 #Files generated during translation
 /wumpus/target/
+/wumpus.iml
 

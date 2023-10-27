@@ -18,6 +18,7 @@ public class BufferedMapReader implements MapReaderInterface {
 
     @Override
     public MapVo readMap() throws MapReaderException {
+        MapVo mapVo;
         try {
             String firstLine = bufferedReader.readLine();
             String[] firstLineParts = firstLine.split(" ");
@@ -46,9 +47,10 @@ public class BufferedMapReader implements MapReaderInterface {
 
 
             HeroVo hero = new HeroVo(heroColumn, heroRow, direction, wumpusCounter, gold);
-            return new MapVo(size, map, hero);
+            mapVo = new MapVo(size, map, hero);
         } catch (IOException e) {
             throw new MapReaderException("Sikertelen térkép beolvasás");
         }
+        return mapVo;
     }
 }

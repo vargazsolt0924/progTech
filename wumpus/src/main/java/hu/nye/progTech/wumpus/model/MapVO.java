@@ -8,19 +8,19 @@ public class MapVO {
 
     private int size;
     private char[][] map;
-    private HeroVO heroVo;
+    private HeroVO heroVO;
 
     public MapVO(int size, char[][] map, HeroVO heroVo) {
         this.size = size;
         this.map = map;
-        this.heroVo = heroVo;
+        this.heroVO = heroVo;
     }
 
     public MapVO() {
     }
 
-    public HeroVO getHeroVo() {
-        return heroVo;
+    public HeroVO getHeroVO() {
+        return heroVO;
     }
 
     public int getSize() {
@@ -39,8 +39,8 @@ public class MapVO {
         this.map = map;
     }
 
-    public void setHeroVo(HeroVO heroVo) {
-        this.heroVo = heroVo;
+    public void setHeroVO(HeroVO heroVO) {
+        this.heroVO = heroVO;
     }
 
     @Override
@@ -52,14 +52,14 @@ public class MapVO {
 
         if (size != mapVo.size) return false;
         if (!Arrays.deepEquals(map, mapVo.map)) return false;
-        return Objects.equals(heroVo, mapVo.heroVo);
+        return Objects.equals(heroVO, mapVo.heroVO);
     }
 
     @Override
     public int hashCode() {
         int result = size;
         result = 31 * result + Arrays.deepHashCode(map);
-        result = 31 * result + (heroVo != null ? heroVo.hashCode() : 0);
+        result = 31 * result + (heroVO != null ? heroVO.hashCode() : 0);
         return result;
     }
 
@@ -68,7 +68,7 @@ public class MapVO {
         final StringBuffer sb = new StringBuffer("MapVo{");
         sb.append("size=").append(size);
         sb.append(", map=").append(map == null ? "null" : Arrays.asList(map).toString());
-        sb.append(", heroVo=").append(heroVo);
+        sb.append(", heroVo=").append(heroVO);
         sb.append('}');
         return sb.toString();
     }

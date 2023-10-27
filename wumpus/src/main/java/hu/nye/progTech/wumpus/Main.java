@@ -4,16 +4,12 @@ import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.Map.MapManager;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Map.MapWriter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Scanner;
 
 
 public class Main {
-
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
@@ -23,7 +19,7 @@ public class Main {
         System.out.println("Szia " + username + "!");
 
         Menu menu = new Menu();
-        MapVO mapVO;
+        MapVO mapVO = new MapVO();
 
         boolean isGameReady = false;
 
@@ -64,16 +60,10 @@ public class Main {
                     MapManager mapManager = new MapManager();
                     File file = new File("C:\\Users\\Varga Zsolt\\IdeaProjects\\progTech\\wumpus\\src\\main\\resources\\map\\wumpuszinput.txt");
                     InputStream inputStream = new FileInputStream(file);
-
                     mapVO = mapManager.readMap(inputStream);
-
-                    MapWriter mapWriter = new MapWriter();
-                    mapWriter.mapPrinter(mapVO);
-
-
-                    System.out.println("Ennyi íjjal rendelkezik jelenleg a hős: " + mapVO.getHeroVo().getArrows());
-                    isGameReady = true;
+                    MapWriter.printMapAndHeroDetails(mapVO); // csináltam a map meg a herotulajdonságnak kiirófüggvényt mert több helyen is ki kellessz írni
                     System.out.println("Kész a páyla beolvasás, ezután válazd ki a játék menüpontot(5) és kezdődhet is a játék.");
+                    isGameReady = true;
                     break;
                 case 3:
                     // Adatbázisból betöltés
@@ -90,22 +80,26 @@ public class Main {
 
                         while (inGameMenu) {
                             gameChoice = menu.getUserChoice();
-
                             switch (gameChoice) {
                                 case 1:
-                                    // Lépés
+                                    mapVO.getHeroVO().move();
+                                    MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 2:
-                                    // Fordulás jobbra
+                                    mapVO.getHeroVO().turnRight();
+                                    MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 3:
-                                    // Fordulás balra
+                                    mapVO.getHeroVO().turnLeft();
+                                    MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 4:
-                                    // Nyíl lövés
+                                    mapVO.getHeroVO().shoot();
+                                    MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 5:
-                                    // Arany felszedése
+                                    mapVO.getHeroVO().pickupGold();
+                                    MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 6:
                                     // Feladás
@@ -116,6 +110,7 @@ public class Main {
                                     System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
                                     break;
                             }
+                           // MapWriter.mapPrinter(mapVO);
                         }
                     } else {
                         System.out.println("Először hajtsa végre a pályaszerkesztést, fájlból beolvasást vagy adatbázisból betöltést.");
@@ -131,4 +126,6 @@ public class Main {
         }
         System.out.println("Kilépés a játékból.");
     }
+
+
 }

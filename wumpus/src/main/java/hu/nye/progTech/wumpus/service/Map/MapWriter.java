@@ -1,11 +1,10 @@
 package hu.nye.progTech.wumpus.service.Map;
 
-
 import hu.nye.progTech.wumpus.model.MapVO;
 
 public class MapWriter {
 
-    public void mapPrinter(MapVO mapVo) {
+    public static void mapPrinter(MapVO mapVo) {
         char[][] mapData = mapVo.getMap();
         int rowCount = 1;
 
@@ -24,6 +23,12 @@ public class MapWriter {
             }
             System.out.println();
         }
+    }
+
+    public static void printMapAndHeroDetails(MapVO map){
+        MapWriter.mapPrinter(map);
+        System.out.println("Ennyi íjjal rendelkezik jelenleg a hős: " + map.getHeroVO().getArrows());
+        System.out.println("Ebbe az irányba áll a hős: " + map.getHeroVO().getDirection());
     }
 
 }

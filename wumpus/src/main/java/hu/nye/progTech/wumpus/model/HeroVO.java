@@ -66,17 +66,44 @@ public class HeroVO implements HeroInterface {
 
     @Override
     public void turnRight() {
-
+        switch (this.direction){
+            case 'E':
+                this.direction = 'S';
+                break;
+            case 'S':
+                this.direction = 'W';
+                break;
+            case 'W':
+                this.direction = 'N';
+                break;
+            default:
+                this.direction = 'E';
+                break;
+        }
     }
+
 
     @Override
     public void turnLeft() {
-
+        switch (this.direction){
+            case 'S':
+                this.direction = 'E';
+                break;
+            case 'W':
+                this.direction = 'S';
+                break;
+            case 'N':
+                this.direction = 'W';
+                break;
+            default:
+                this.direction = 'N';
+                break;
+        }
     }
 
     @Override
     public void shoot() {
-
+        this.arrows--;
     }
 
     @Override

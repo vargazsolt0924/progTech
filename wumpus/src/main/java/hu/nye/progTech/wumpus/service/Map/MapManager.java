@@ -18,7 +18,7 @@ public class MapManager{
        BufferedMapReader mapReader = new BufferedMapReader(bufferedReader);
 
        try {
-           return mapReader.readMap(); // Most a MapVo objektumot adja vissza
+           return mapReader.readMap();
        } catch (MapReaderException e) {
           logger.error("Valami hiba történt a pálya beolvasás közben!", e);
             return null;
@@ -28,7 +28,7 @@ public class MapManager{
     public void printMap(MapVO mapVO) {
         if (mapVO != null) {
             MapWriter mapWriter = new MapWriter();
-            mapWriter.mapPrinter(mapVO);
+            MapWriter.mapPrinter(mapVO);
         } else {
             System.out.println("Hiba történt a pálya beolvasása közben.");
         }

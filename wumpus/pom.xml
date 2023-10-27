@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hu.nye.progTech.wumpus</groupId>
+    <groupId>hu.nye.progTech</groupId>
     <artifactId>wumpus</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -64,18 +64,14 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-            </plugin>
-            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.2</version>
                 <configuration>
                     <excludes>
-                        <exclude>hu/nye/progTech/wumpus/Main.*</exclude>
                         <exclude>hu/nye/progTech/wumpus/model/*</exclude>
+                        <exclude>hu/nye/progTech/wumpus/Main.*</exclude>
+                        <exclude>hu/nye/progTech/wumpus/service/Menu/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -115,8 +111,23 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <include>Sample.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.9.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
             </plugin>
         </plugins>
     </build>

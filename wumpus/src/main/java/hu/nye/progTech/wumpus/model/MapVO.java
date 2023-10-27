@@ -4,22 +4,22 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class MapVo {
+public class MapVO {
 
     private int size;
     private char[][] map;
-    private HeroVo heroVo;
+    private HeroVO heroVo;
 
-    public MapVo(int size, char[][] map, HeroVo heroVo) {
+    public MapVO(int size, char[][] map, HeroVO heroVo) {
         this.size = size;
         this.map = map;
         this.heroVo = heroVo;
     }
 
-    public MapVo() {
+    public MapVO() {
     }
 
-    public HeroVo getHeroVo() {
+    public HeroVO getHeroVo() {
         return heroVo;
     }
 
@@ -39,7 +39,7 @@ public class MapVo {
         this.map = map;
     }
 
-    public void setHeroVo(HeroVo heroVo) {
+    public void setHeroVo(HeroVO heroVo) {
         this.heroVo = heroVo;
     }
 
@@ -48,7 +48,7 @@ public class MapVo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MapVo mapVo = (MapVo) o;
+        MapVO mapVo = (MapVO) o;
 
         if (size != mapVo.size) return false;
         if (!Arrays.deepEquals(map, mapVo.map)) return false;

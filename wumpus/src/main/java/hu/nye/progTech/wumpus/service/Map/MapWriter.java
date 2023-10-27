@@ -1,11 +1,11 @@
 package hu.nye.progTech.wumpus.service.Map;
 
 
-import hu.nye.progTech.wumpus.model.MapVo;
+import hu.nye.progTech.wumpus.model.MapVO;
 
 public class MapWriter {
 
-    public void mapPrinter(MapVo mapVo) {
+    public void mapPrinter(MapVO mapVo) {
         char[][] mapData = mapVo.getMap();
         int rowCount = 1;
 

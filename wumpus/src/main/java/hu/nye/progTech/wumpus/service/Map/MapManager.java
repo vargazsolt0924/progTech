@@ -1,7 +1,7 @@
 package hu.nye.progTech.wumpus.service.Map;
 
 import hu.nye.progTech.wumpus.Main;
-import hu.nye.progTech.wumpus.model.MapVo;
+import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 public class MapManager{
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-    public MapVo readMap(InputStream inputStream) {
+    public MapVO readMap(InputStream inputStream) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         BufferedMapReader mapReader = new BufferedMapReader(bufferedReader);
 
@@ -25,7 +25,7 @@ public class MapManager{
         }
     }
 
-    public void printMap(MapVo mapVo) {
+    public void printMap(MapVO mapVo) {
         if (mapVo != null) {
             MapWriter mapWriter = new MapWriter();
             mapWriter.mapPrinter(mapVo);

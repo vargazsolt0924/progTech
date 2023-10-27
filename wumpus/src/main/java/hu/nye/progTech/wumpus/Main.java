@@ -1,7 +1,6 @@
 package hu.nye.progTech.wumpus;
 
-import hu.nye.progTech.wumpus.model.HeroVo;
-import hu.nye.progTech.wumpus.model.MapVo;
+import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.Map.MapManager;
 import hu.nye.progTech.wumpus.service.Menu.GameMenuEngine;
 import hu.nye.progTech.wumpus.service.Menu.MapEditorMenuEngine;
@@ -20,7 +19,7 @@ public class Main {
         User.greetUser(username);
 
         Menu menu = new Menu();
-        MapVo map = null;
+        MapVO map = null;
 
         boolean isGameReady = false;
         boolean quit = false;
@@ -44,6 +43,7 @@ public class Main {
                     mapManager.printMap(map);
                     System.out.println("A beolvasás megtörtént, most válaszd ki a játékmenüpontot(5) aztán már kezdődhet is a játék.");
                     System.out.println("Ennyi nyíllal rendelkezik a hős jelnleg: " + map.getHeroVo().getArrows());
+                    System.out.println("A hös kezdeti pozíciójának " + "oszlopa: "+ (char)('A' + map.getHeroVo().getColumn()) + " ,sora: " + map.getHeroVo().getRow() + " és iránya: " + map.getHeroVo().getDirection());
                     isGameReady = true;
                     break;
                 case 3:

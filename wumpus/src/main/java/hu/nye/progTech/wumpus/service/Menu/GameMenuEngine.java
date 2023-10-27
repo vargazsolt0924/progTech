@@ -1,8 +1,12 @@
 package hu.nye.progTech.wumpus.service.Menu;
 
+import hu.nye.progTech.wumpus.model.HeroVO;
+
 public class GameMenuEngine {
 
     Menu menu = new Menu();
+
+    HeroVO heroVO;
 
     public GameMenuEngine() {
 
@@ -21,22 +25,21 @@ public class GameMenuEngine {
 
             switch (gameChoice) {
                 case 1:
-                    // Lépés
+                    heroVO.move();
                     break;
                 case 2:
-                    // Fordulás jobbra
+                    heroVO.turnRight();
                     break;
                 case 3:
-                    // Fordulás balra
+                    heroVO.turnLeft();
                     break;
                 case 4:
-                    // Nyíllövés
+                    heroVO.shoot();
                     break;
                 case 5:
-                    // Arany felszedése
+                    heroVO.pickupGold();
                     break;
                 case 6:
-                    // Feladás
                     inGameMenu = false;
                     menu.showMainMenu();
                     break;

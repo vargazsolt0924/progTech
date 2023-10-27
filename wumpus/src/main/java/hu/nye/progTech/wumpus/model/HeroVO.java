@@ -1,15 +1,13 @@
 package hu.nye.progTech.wumpus.model;
 
-import java.util.Objects;
-
-public class HeroVo implements HeroInterface {
+public class HeroVO implements HeroInterface {
     private char column;
     private int row;
     private char direction;
     private int arrows;
     private int gold;
 
-    public HeroVo(char column, int row, char direction, int arrows, int gold) {
+    public HeroVO(char column, int row, char direction, int arrows, int gold) {
         this.column = column;
         this.row = row;
         this.direction = direction;
@@ -17,7 +15,7 @@ public class HeroVo implements HeroInterface {
         this.gold = gold;
     }
 
-    public HeroVo() {
+    public HeroVO() {
     }
 
 
@@ -91,7 +89,7 @@ public class HeroVo implements HeroInterface {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        HeroVo heroVo = (HeroVo) o;
+        HeroVO heroVo = (HeroVO) o;
 
         if (column != heroVo.column) return false;
         if (row != heroVo.row) return false;

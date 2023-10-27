@@ -61,7 +61,7 @@ public class Main {
                     File file = new File("C:\\Users\\Varga Zsolt\\IdeaProjects\\progTech\\wumpus\\src\\main\\resources\\map\\wumpuszinput.txt");
                     InputStream inputStream = new FileInputStream(file);
                     mapVO = mapManager.readMap(inputStream);
-                    MapWriter.printMapAndHeroDetails(mapVO); // csináltam a map meg a herotulajdonságnak kiirófüggvényt mert több helyen is ki kellessz írni
+                    MapWriter.printMapAndHeroDetails(mapVO);
                     System.out.println("Kész a páyla beolvasás, ezután válazd ki a játék menüpontot(5) és kezdődhet is a játék.");
                     isGameReady = true;
                     break;
@@ -110,10 +110,9 @@ public class Main {
                                     System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
                                     break;
                             }
-                           // MapWriter.mapPrinter(mapVO);
                         }
                     } else {
-                        System.out.println("Először hajtsa végre a pályaszerkesztést, fájlból beolvasást vagy adatbázisból betöltést.");
+                        System.out.println("Először hajtsa végre a pályaszerkesztést, fájlból beolvasást vagy adatbázisból betöltést, de még most csak a fájlból beolvasás elérhető.");
                     }
                     break;
                 case 6:

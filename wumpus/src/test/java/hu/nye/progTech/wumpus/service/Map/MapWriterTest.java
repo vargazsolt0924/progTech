@@ -22,7 +22,7 @@ public class MapWriterTest {
         // GIVEN
         MapVO mapVO = null;
 
-        // WHEN - THEN (using an assertion to check for the expected exception)
+        // WHEN - THEN
         assertThrows(NullPointerException.class, () -> underTest.mapPrinter(mapVO));
     }
 

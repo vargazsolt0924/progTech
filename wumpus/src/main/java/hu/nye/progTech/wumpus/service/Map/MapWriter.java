@@ -4,8 +4,8 @@ import hu.nye.progTech.wumpus.model.MapVO;
 
 public class MapWriter {
 
-    public static void mapPrinter(MapVO mapVo) {
-        char[][] mapData = mapVo.getMap();
+    public static void mapPrinter(MapVO mapVO) {
+        char[][] mapData = mapVO.getMap();
         int rowCount = 1;
 
         System.out.print("  ");
@@ -27,7 +27,7 @@ public class MapWriter {
 
     public static void printMapAndHeroDetails(MapVO map){
         MapWriter.mapPrinter(map);
-        System.out.println("Ennyi íjjal rendelkezik jelenleg a hős: " + map.getHeroVO().getArrows());
+        System.out.println("Ennyi nyillal rendelkezik jelenleg a hős: " + map.getHeroVO().getArrows());
         System.out.println("Ebbe az irányba áll a hős: " + map.getHeroVO().getDirection());
     }
 

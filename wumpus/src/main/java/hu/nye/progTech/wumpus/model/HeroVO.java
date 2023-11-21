@@ -1,23 +1,57 @@
 package hu.nye.progTech.wumpus.model;
 
+import hu.nye.progTech.wumpus.service.Hero.HeroActions;
+
+import java.util.Objects;
+
 public class HeroVO implements HeroInterface {
     private char column;
     private int row;
     private char direction;
     private int arrows;
-    private int gold;
+    private boolean gold;
+    private int startingRow;
+    private char startingColumn;
+    private int steps;
+    private MapVO mapVO;
+    private HeroActions heroActions;
 
-    public HeroVO(char column, int row, char direction, int arrows, int gold) {
+    public HeroVO(char column, int row, char direction, int arrows, boolean gold, int startingRow, char startingColumn, MapVO mapVO) {
         this.column = column;
         this.row = row;
         this.direction = direction;
         this.arrows = arrows;
-        this.gold = gold;
+        this.gold = false;
+        this.startingRow = startingRow;
+        this.startingColumn = startingColumn;
+        this.steps = 0;
+        if (mapVO != null) {
+            this.mapVO = mapVO;
+            this.heroActions = new HeroActions(mapVO);
+            setHeroData();
+        } else {
+            throw new IllegalArgumentException("MapVO cannot be null");
+        }
+    }
+
+    public HeroVO(char column, int row, char direction, int arrows, boolean gold, int startingRow, char startingColumn) {
+        this.column = column;
+        this.row = row;
+        this.direction = direction;
+        this.arrows = arrows;
+        this.gold = false;
+        this.startingRow = startingRow;
+        this.startingColumn = startingColumn;
     }
 
     public HeroVO() {
     }
 
+    private void setHeroData() {
+        if (mapVO != null) {
+            mapVO.setHeroVO(this);
+        }
+    }
 
     public char getColumn() {
         return column;
@@ -51,78 +85,111 @@ public class HeroVO implements HeroInterface {
         this.arrows = arrows;
     }
 
-    public int getGold() {
+    public boolean isGold() {
         return gold;
     }
 
-    public void setGold(int gold) {
+    public void setGold(boolean gold) {
         this.gold = gold;
     }
 
+    public int getStartingRow() {
+        return startingRow;
+    }
+
+    public void setStartingRow(int startingRow) {
+        this.startingRow = startingRow;
+    }
+
+    public char getStartingColumn() {
+        return startingColumn;
+    }
+
+    public void setStartingColumn(char startingColumn) {
+        this.startingColumn = startingColumn;
+    }
+
+    public MapVO getMapVO() {
+        return mapVO;
+    }
+
+    public void setMapVO(MapVO mapVO) {
+        this.mapVO = mapVO;
+    }
+
+    public int getSteps() {
+        return steps;
+    }
+
+    public void setSteps(int steps) {
+        this.steps = steps;
+    }
+
+
     @Override
     public void move() {
-
+        heroActions.move();
     }
 
     @Override
     public void turnRight() {
-        switch (this.direction){
-            case 'E':
-                this.direction = 'S';
-                break;
-            case 'S':
-                this.direction = 'W';
-                break;
-            case 'W':
-                this.direction = 'N';
-                break;
-            default:
-                this.direction = 'E';
-                break;
-        }
+        heroActions.turnRight();
     }
-
 
     @Override
     public void turnLeft() {
-        switch (this.direction){
-            case 'S':
-                this.direction = 'E';
-                break;
-            case 'W':
-                this.direction = 'S';
-                break;
-            case 'N':
-                this.direction = 'W';
-                break;
-            default:
-                this.direction = 'N';
-                break;
-        }
+        heroActions.turnLeft();
     }
 
     @Override
-    public void shoot() {
-        this.arrows--;
+    public void shoot(MapVO mapVO) {
+        heroActions.shoot(mapVO);
     }
 
     @Override
-    public void pickupGold() {
-
+    public boolean pickupGold() {
+        return heroActions.pickupGold();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        HeroVO heroVo = (HeroVO) o;
+        HeroVO heroVO = (HeroVO) o;
 
-        if (column != heroVo.column) return false;
-        if (row != heroVo.row) return false;
-        if (direction != heroVo.direction) return false;
-        if (arrows != heroVo.arrows) return false;
-        return gold == heroVo.gold;
+        if (column != heroVO.column) {
+            return false;
+        }
+        if (row != heroVO.row) {
+            return false;
+        }
+        if (direction != heroVO.direction) {
+            return false;
+        }
+        if (arrows != heroVO.arrows) {
+            return false;
+        }
+        if (gold != heroVO.gold) {
+            return false;
+        }
+        if (startingRow != heroVO.startingRow) {
+            return false;
+        }
+        if (startingColumn != heroVO.startingColumn) {
+            return false;
+        }
+        if (steps != heroVO.steps) {
+            return false;
+        }
+        if (!Objects.equals(mapVO, heroVO.mapVO)) {
+            return false;
+        }
+        return Objects.equals(heroActions, heroVO.heroActions);
     }
 
     @Override
@@ -131,18 +198,28 @@ public class HeroVO implements HeroInterface {
         result = 31 * result + row;
         result = 31 * result + (int) direction;
         result = 31 * result + arrows;
-        result = 31 * result + gold;
+        result = 31 * result + (gold ? 1 : 0);
+        result = 31 * result + startingRow;
+        result = 31 * result + (int) startingColumn;
+        result = 31 * result + steps;
+        result = 31 * result + (mapVO != null ? mapVO.hashCode() : 0);
+        result = 31 * result + (heroActions != null ? heroActions.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("HeroVo{");
+        final StringBuffer sb = new StringBuffer("HeroVO{");
         sb.append("column=").append(column);
         sb.append(", row=").append(row);
         sb.append(", direction=").append(direction);
         sb.append(", arrows=").append(arrows);
         sb.append(", gold=").append(gold);
+        sb.append(", startingRow=").append(startingRow);
+        sb.append(", startingColumn=").append(startingColumn);
+        sb.append(", steps=").append(steps);
+        sb.append(", mapVO=").append(mapVO);
+        sb.append(", heroActions=").append(heroActions);
         sb.append('}');
         return sb.toString();
     }

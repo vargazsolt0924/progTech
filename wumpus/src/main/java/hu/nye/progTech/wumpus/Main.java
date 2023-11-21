@@ -23,6 +23,7 @@ public class Main {
 
         boolean isGameReady = false;
 
+
         boolean quit = false;
 
         menu.showMainMenu();
@@ -94,17 +95,14 @@ public class Main {
                                     MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 4:
-                                    mapVO.getHeroVO().shoot();
+                                    mapVO.getHeroVO().shoot(mapVO);
                                     MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 5:
-                                    mapVO.getHeroVO().pickupGold();
-                                    MapWriter.printMapAndHeroDetails(mapVO);
-                                    break;
-                                case 6:
                                     // Feladás
                                     inGameMenu = false;
                                     menu.showMainMenu();
+                                    System.out.println("Sajnos feladtad a játékot");
                                     break;
                                 default:
                                     System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");

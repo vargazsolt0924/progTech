@@ -8,7 +8,7 @@ public interface HeroInterface {
 
     public void turnLeft();
 
-    public void shoot();
+    public void shoot(MapVO mapVO);
 
-    public void pickupGold();
+    public boolean pickupGold();
 }

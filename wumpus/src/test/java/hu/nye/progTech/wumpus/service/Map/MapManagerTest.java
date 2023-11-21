@@ -44,7 +44,7 @@ class MapManagerTest {
                 {'U', 'W', 'U', 'U', 'P'}
         };
 
-        heroVOMock = new HeroVO('A', 0, 'W', 0, 0);
+        heroVOMock = new HeroVO('A', 0, 'W', 0, false, 0 , 'A');
         mapVOMock = new MapVO(5, mapData, heroVOMock);
 
         // WHEN
@@ -93,11 +93,11 @@ class MapManagerTest {
     @Test
     void testPrintMapShouldRunWhenGetInvalidHeroVO() {
         // Given
-        HeroVO heroVOMock = new HeroVO('A', -1, 'W', 0, 0);
+        HeroVO heroVOMock = new HeroVO('A', -1, 'W', 0, false, 1 , 'A');
         MapVO mapVOMock = new MapVO(5, new char[5][5], heroVOMock);
 
         // When
-        underTest.printMap(mapVOMock);
+        underTest.printMap(mapVOMock.getHeroVO().getMapVO());
 
         // Then
     }

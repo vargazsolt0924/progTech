@@ -43,15 +43,24 @@ public class MapVO {
         this.heroVO = heroVO;
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         MapVO mapVo = (MapVO) o;
 
-        if (size != mapVo.size) return false;
-        if (!Arrays.deepEquals(map, mapVo.map)) return false;
+        if (size != mapVo.size) {
+            return false;
+        }
+        if (!Arrays.deepEquals(map, mapVo.map)) {
+            return false;
+        }
         return Objects.equals(heroVO, mapVo.heroVO);
     }
 

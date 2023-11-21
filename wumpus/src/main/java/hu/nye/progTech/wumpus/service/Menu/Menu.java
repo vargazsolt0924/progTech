@@ -27,8 +27,7 @@ public class Menu {
         System.out.println("2. Fordulás jobbra");
         System.out.println("3. Fordulás balra");
         System.out.println("4. Nyíl lövés");
-        System.out.println("5. Arany felszedése");
-        System.out.println("6. Feladás");
+        System.out.println("5. Feladás");
     }
 
     public void showGameEditorMenu() {

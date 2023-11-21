@@ -3,7 +3,6 @@ package hu.nye.progTech.wumpus.service.Map;
 import hu.nye.progTech.wumpus.model.HeroVO;
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -18,7 +17,6 @@ public class BufferedMapReader implements MapReaderInterface {
 
     @Override
     public MapVO readMap() throws MapReaderException {
-        MapVO mapVo;
         try {
             String firstLine = bufferedReader.readLine();
             String[] firstLineParts = firstLine.split(" ");
@@ -31,26 +29,29 @@ public class BufferedMapReader implements MapReaderInterface {
             char heroColumn = (char) (firstLineParts[1].charAt(0) - 'A');
             int heroRow = Integer.parseInt(firstLineParts[2]);
             char direction = firstLineParts[3].charAt(0);
-            int gold = 0;
+            boolean gold = false;
             int wumpusCounter = 0;
             char[][] map = new char[size][size];
+
             for (int i = 0; i < size; i++) {
                 String row = bufferedReader.readLine();
                 for (int j = 0; j < size; j++) {
                     map[i][j] = row.charAt(j);
-                    if(row.charAt(j) == 'U'){
+                    if (row.charAt(j) == 'U') {
                         wumpusCounter++;
                     }
                 }
             }
             map[heroRow-1][heroColumn] = 'H';
 
+            MapVO mapVO = new MapVO(size, map, null);
+            HeroVO hero = new HeroVO(heroColumn, heroRow, direction, wumpusCounter, gold, heroRow, heroColumn, mapVO);
+            hero.setMapVO(mapVO); // Beállítjuk a mapVO-t a hero-nak
 
-            HeroVO hero = new HeroVO(heroColumn, heroRow, direction, wumpusCounter, gold);
-            mapVo = new MapVO(size, map, hero);
+            return mapVO;
+
         } catch (IOException e) {
             throw new MapReaderException("Sikertelen térkép beolvasás");
         }
-        return mapVo;
     }
 }

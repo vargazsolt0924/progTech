@@ -1,6 +1,5 @@
 package hu.nye.progTech.wumpus.service.Map;
 
-import hu.nye.progTech.wumpus.model.HeroVO;
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
 import org.junit.jupiter.api.BeforeEach;

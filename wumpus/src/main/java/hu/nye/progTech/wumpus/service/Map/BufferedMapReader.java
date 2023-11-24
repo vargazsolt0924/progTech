@@ -46,7 +46,7 @@ public class BufferedMapReader implements MapReaderInterface {
 
             MapVO mapVO = new MapVO(size, map, null);
             HeroVO hero = new HeroVO(heroColumn, heroRow, direction, wumpusCounter, gold, heroRow, heroColumn, mapVO);
-            hero.setMapVO(mapVO); // Beállítjuk a mapVO-t a hero-nak
+            hero.setMapVO(mapVO);
 
             return mapVO;
 

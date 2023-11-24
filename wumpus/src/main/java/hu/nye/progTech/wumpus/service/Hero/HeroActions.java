@@ -71,11 +71,8 @@ public class HeroActions implements HeroInterface {
             map[heroVO.getRow() - 1][heroVO.getColumn()] = 'H';
             heroVO.setSteps(heroVO.getSteps() + 1);
         }
-            if (isAtStartingPositionWithGold(heroVO)) {
-                System.out.println("Gratulálunk! Felvetted a goldot és visszatértél a kezdőpozícióba.");
-                System.out.println("Lépésszám: " + heroVO.getSteps());
-                menu.showMainMenu();
-            }
+       celebrateVictory();
+
     }
 
     @Override
@@ -120,23 +117,66 @@ public class HeroActions implements HeroInterface {
 
     @Override
     public void shoot(MapVO mapVO) {
-        // Implement shoot logic here
+        HeroVO heroVO = mapVO.getHeroVO();
+        char[][] map = mapVO.getMap();
+        int wumpusRow = -1, wumpusColumn = -1;
+
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                if (map[i][j] == 'U') {
+                    wumpusRow = i;
+                    wumpusColumn = j;
+                    break;
+                }
+            }
+        }
+
+        if (heroVO.getArrows() > 0) {
+            switch (heroVO.getDirection()) {
+                case 'N':
+                    if (wumpusRow < heroVO.getRow()) {
+                        map[wumpusRow][wumpusColumn] = '_';
+                        System.out.println("You shot the wumpus!");
+                        heroVO.setArrows(heroVO.getArrows() - 1);
+                    }
+                    break;
+                case 'S':
+                    if (wumpusRow > heroVO.getRow()) {
+                        map[wumpusRow][wumpusColumn] = '_';
+                        System.out.println("You shot the wumpus!");
+                        heroVO.setArrows(heroVO.getArrows() - 1);
+                    }
+                    break;
+                case 'E':
+                    if (wumpusColumn > heroVO.getColumn()) {
+                        map[wumpusRow][wumpusColumn] = '_';
+                        System.out.println("You shot the wumpus!");
+                        heroVO.setArrows(heroVO.getArrows() - 1);
+                    }
+                    break;
+                case 'W':
+                    if (wumpusColumn < heroVO.getColumn()) {
+                        map[wumpusRow][wumpusColumn] = '_';
+                        System.out.println("You shot the wumpus!");
+                        heroVO.setArrows(heroVO.getArrows() - 1);
+                    }
+                    break;
+            }
+        } else {
+            System.out.println("You don't have any arrows to shoot!");
+        }
     }
 
     @Override
     public boolean pickupGold() {
         HeroVO heroVO = mapVO.getHeroVO();
         heroVO.setGold(true);
-        System.out.println("Gold picked up!");
         return heroVO.pickupGold();
     }
 
-
-    private boolean isAtStartingPositionWithGold(HeroVO heroVO) {
-        return heroVO.getRow() == heroVO.getStartingRow() &&
-                heroVO.getColumn() == heroVO.getStartingColumn() &&
-                heroVO.isGold();
+    public void celebrateVictory() {
+        HeroVO heroVO = mapVO.getHeroVO();
+        System.out.println("Congratulations! You won with " + heroVO.getSteps() + " steps!");
+        menu.showMainMenu();
     }
-
-
 }

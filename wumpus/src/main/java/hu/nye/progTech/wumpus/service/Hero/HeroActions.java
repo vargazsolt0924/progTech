@@ -46,12 +46,12 @@ public class HeroActions implements HeroInterface {
         char currentPosition = map[oldRow - 1][oldColumn];
 
         if (newPosition == 'W') {
-            System.out.println("Itt fal van ide nem léphetsz.");
+            System.out.println("There's a wall over there, you can't step here.");
             heroVO.setColumn((char) oldColumn);
             heroVO.setRow(oldRow);
             heroVO.setSteps(heroVO.getSteps() + 1);
         } else if (newPosition == 'U') {
-            System.out.println("Wumpus megölt így vége a játéknak.");
+            System.out.println("Wumpus killed you, so the game is ended.");
             System.exit(0);
         } else if (newPosition == 'P') {
             heroVO.setArrows(heroVO.getArrows() - 1);
@@ -71,7 +71,7 @@ public class HeroActions implements HeroInterface {
             map[heroVO.getRow() - 1][heroVO.getColumn()] = 'H';
             heroVO.setSteps(heroVO.getSteps() + 1);
         }
-       celebrateVictory();
+        celebrateVictory();
 
     }
 
@@ -136,28 +136,28 @@ public class HeroActions implements HeroInterface {
                 case 'N':
                     if (wumpusRow < heroVO.getRow()) {
                         map[wumpusRow][wumpusColumn] = '_';
-                        System.out.println("You shot the wumpus!");
+                        System.out.println("You shot out the wumpus!");
                         heroVO.setArrows(heroVO.getArrows() - 1);
                     }
                     break;
                 case 'S':
                     if (wumpusRow > heroVO.getRow()) {
                         map[wumpusRow][wumpusColumn] = '_';
-                        System.out.println("You shot the wumpus!");
+                        System.out.println("You shot out the wumpus!");
                         heroVO.setArrows(heroVO.getArrows() - 1);
                     }
                     break;
                 case 'E':
                     if (wumpusColumn > heroVO.getColumn()) {
                         map[wumpusRow][wumpusColumn] = '_';
-                        System.out.println("You shot the wumpus!");
+                        System.out.println("You shot out the wumpus!");
                         heroVO.setArrows(heroVO.getArrows() - 1);
                     }
                     break;
                 case 'W':
                     if (wumpusColumn < heroVO.getColumn()) {
                         map[wumpusRow][wumpusColumn] = '_';
-                        System.out.println("You shot the wumpus!");
+                        System.out.println("You shot out the wumpus!");
                         heroVO.setArrows(heroVO.getArrows() - 1);
                     }
                     break;

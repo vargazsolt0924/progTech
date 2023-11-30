@@ -3,6 +3,7 @@ package hu.nye.progTech.wumpus.service.Map;
 import hu.nye.progTech.wumpus.model.HeroVO;
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -42,7 +43,7 @@ public class BufferedMapReader implements MapReaderInterface {
                     }
                 }
             }
-            map[heroRow-1][heroColumn] = 'H';
+            map[heroRow - 1][heroColumn] = 'H';
 
             MapVO mapVO = new MapVO(size, map, null);
             HeroVO hero = new HeroVO(heroColumn, heroRow, direction, wumpusCounter, gold, heroRow, heroColumn, mapVO);

@@ -25,7 +25,7 @@ public class MapWriter {
         }
     }
 
-    public static void printMapAndHeroDetails(MapVO map){
+    public static void printMapAndHeroDetails(MapVO map) {
         MapWriter.mapPrinter(map);
         System.out.println("Ennyi nyillal rendelkezik jelenleg a hős: " + map.getHeroVO().getArrows());
         System.out.println("Ebbe az irányba áll a hős: " + map.getHeroVO().getDirection());

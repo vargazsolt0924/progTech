@@ -8,21 +8,19 @@ import hu.nye.progTech.wumpus.service.Map.MapWriter;
 import java.io.*;
 import java.util.Scanner;
 
-
 public class Main {
-
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Kérem, adjon meg egy felhasználónevet: ");
+        System.out.print("Please enter a username: ");
         String username = scanner.nextLine();
-        System.out.println("Szia " + username + "!");
+        System.out.println("Hi " + username + "!");
+
 
         Menu menu = new Menu();
         MapVO mapVO = new MapVO();
 
         boolean isGameReady = false;
-
 
         boolean quit = false;
 
@@ -32,7 +30,6 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // Pályaszerkesztés
                     boolean inGameEditorMenu = true;
                     int gameChoiceAtEditorMenu;
                     menu.showGameEditorMenu();
@@ -51,7 +48,7 @@ public class Main {
                                 menu.showMainMenu();
                                 break;
                             default:
-                                System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
+                                System.out.println("You have selected a menu option that doesn't exist. Please choose a new one!");
                                 break;
                         }
                     }
@@ -63,15 +60,14 @@ public class Main {
                     InputStream inputStream = new FileInputStream(file);
                     mapVO = mapManager.readMap(inputStream);
                     MapWriter.printMapAndHeroDetails(mapVO);
-                    System.out.println("Kész a páyla beolvasás, ezután válazd ki a játék menüpontot(5) és kezdődhet is a játék.");
+                    System.out.println("The map is read in is done. Now select the game menu option(5) and the game can begin.");
                     isGameReady = true;
                     break;
                 case 3:
-                    // Adatbázisból betöltés
                     isGameReady = true;
                     break;
                 case 4:
-                    // Adatbázisba mentés
+                    isGameReady = true;
                     break;
                 case 5:
                     if (isGameReady) {
@@ -99,30 +95,27 @@ public class Main {
                                     MapWriter.printMapAndHeroDetails(mapVO);
                                     break;
                                 case 5:
-                                    // Feladás
                                     inGameMenu = false;
                                     menu.showMainMenu();
-                                    System.out.println("Sajnos feladtad a játékot");
+                                    System.out.println("Unfortunately, you give up the game");
                                     break;
                                 default:
-                                    System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
+                                    System.out.println("You have selected a menu option that doesn't exist. Please choose a new one!");
                                     break;
                             }
                         }
                     } else {
-                        System.out.println("Először hajtsa végre a pályaszerkesztést, fájlból beolvasást vagy adatbázisból betöltést, de még most csak a fájlból beolvasás elérhető.");
+                        System.out.println("First do map editing, read from file or load from database, but only read fromm file is available for now.");
                     }
                     break;
                 case 6:
                     quit = true;
                     break;
                 default:
-                    System.out.println("Nem létező menüponot választottál. Kérlek, válassz egy újat.");
+                    System.out.println("You have selected a menu option that doesn't exist. Please choose a new one!");
                     break;
             }
         }
-        System.out.println("Kilépés a játékból.");
+        System.out.println("Quit the game.");
     }
-
-
 }

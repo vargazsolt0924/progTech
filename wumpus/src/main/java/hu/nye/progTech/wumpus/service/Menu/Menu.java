@@ -12,34 +12,34 @@ public class Menu {
     }
 
     public void showMainMenu() {
-        System.out.println("\n==== Wumpusz Labirintus Játék ====");
-        System.out.println("1. Pályaszerkesztés");
-        System.out.println("2. Fájlból beolvasás");
-        System.out.println("3. Adatbázisból betöltés");
-        System.out.println("4. Adatbázisba mentés");
-        System.out.println("5. Játék indítása");
-        System.out.println("6. Kilépés");
+        System.out.println("\n==== Wumpusz Labyrinth Game ====");
+        System.out.println("1. Map editing");
+        System.out.println("2. Reading in from file");
+        System.out.println("3. Loading from database");
+        System.out.println("4. Save to database");
+        System.out.println("5. Start game");
+        System.out.println("6. Exit");
     }
 
     public void showGameMenu() {
-        System.out.println("\n==== Játék Menü ====");
-        System.out.println("1. Lépés");
-        System.out.println("2. Fordulás jobbra");
-        System.out.println("3. Fordulás balra");
-        System.out.println("4. Lövés");
-        System.out.println("5. Feladás");
+        System.out.println("\n==== Game Menu ====");
+        System.out.println("1. Step");
+        System.out.println("2. Turn right");
+        System.out.println("3. Turn left");
+        System.out.println("4. Shoot");
+        System.out.println("5. Give up");
     }
 
     public void showGameEditorMenu() {
-        System.out.println("\n==== Pályaszerkeztés menü ====");
-        System.out.println("1. Pálya létrehozás");
-        System.out.println("2. Pálya részletek hozzáadása");
-        System.out.println("3. Az elkészített pálya lementése");
-        System.out.println("4. Vissza a főmenübe");
+        System.out.println("\n==== Map Editing menu ====");
+        System.out.println("1. Map creation");
+        System.out.println("2. Add map elements");
+        System.out.println("3. Saving the created map");
+        System.out.println("4. Back to main menu");
     }
 
     public int getUserChoice() {
-        System.out.print("Válassz egy menüpontot: ");
+        System.out.print("Choose a menu option: ");
         return scanner.nextInt();
     }
 

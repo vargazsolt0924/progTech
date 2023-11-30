@@ -9,27 +9,30 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MapManager{
+public class MapManager {
     private static final Logger logger = LoggerFactory.getLogger(MapManager.class);
 
-   public MapVO readMap(InputStream inputStream) {
-       BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-       BufferedMapReader mapReader = new BufferedMapReader(bufferedReader);
+    private MapVO mapVO;
 
-       try {
-           return mapReader.readMap();
-       } catch (MapReaderException e) {
-          logger.error("Valami hiba történt a pálya beolvasás közben!", e);
+    public MapVO readMap(InputStream inputStream) {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedMapReader mapReader = new BufferedMapReader(bufferedReader);
+
+        try {
+            return mapReader.readMap();
+        } catch (MapReaderException e) {
+            logger.error("Valami hiba történt a pálya beolvasás közben!", e);
             return null;
-       }
+        }
     }
 
     public void printMap(MapVO mapVO) {
         if (mapVO != null) {
-           // MapWriter mapWriter = new MapWriter();
             MapWriter.mapPrinter(mapVO);
         } else {
             System.out.println("Hiba történt a pálya beolvasása közben.");
         }
     }
+
+
 }

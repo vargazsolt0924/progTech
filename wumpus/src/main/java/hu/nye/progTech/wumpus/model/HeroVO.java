@@ -44,6 +44,14 @@ public class HeroVO implements HeroInterface {
         this.startingColumn = startingColumn;
     }
 
+    public HeroVO(char column, int row, char direction, int arrows, boolean gold) {
+        this.column = column;
+        this.row = row;
+        this.direction = direction;
+        this.arrows = arrows;
+        this.gold = gold;
+    }
+
     public HeroVO() {
     }
 

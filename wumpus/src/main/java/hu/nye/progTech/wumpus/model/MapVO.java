@@ -19,6 +19,11 @@ public class MapVO {
     public MapVO() {
     }
 
+    public MapVO(int size, char[][] map) {
+        this.size = size;
+        this.map = map;
+    }
+
     public HeroVO getHeroVO() {
         return heroVO;
     }

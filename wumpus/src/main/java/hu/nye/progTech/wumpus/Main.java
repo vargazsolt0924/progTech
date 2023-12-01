@@ -1,24 +1,30 @@
 package hu.nye.progTech.wumpus;
 
+import hu.nye.progTech.wumpus.service.database.LoadFromDatabase;
+import hu.nye.progTech.wumpus.service.database.SaveToDatabase;
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.Map.MapManager;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 import hu.nye.progTech.wumpus.service.Map.MapWriter;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Please enter a username: ");
         String username = scanner.nextLine();
         System.out.println("Hi " + username + "!");
 
-
         Menu menu = new Menu();
         MapVO mapVO = new MapVO();
+
 
         boolean isGameReady = false;
 
@@ -64,9 +70,22 @@ public class Main {
                     isGameReady = true;
                     break;
                 case 3:
+                        try (Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/progTech", "sa", "password")) {
+                            LoadFromDatabase loadFromDatabase = new LoadFromDatabase(connection);
+                            loadFromDatabase.loadMapFromDb(username);
+                        } catch (SQLException e) {
+                            System.out.println("Unexpected error happened" + e);
+                        }
+                    MapWriter.printMapAndHeroDetails(mapVO);
                     isGameReady = true;
                     break;
                 case 4:
+                    try(Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/progTech", "sa", "password")) {
+                        SaveToDatabase saveToDatabase = new SaveToDatabase(connection);
+                        saveToDatabase.saveMapToDb(mapVO, username);
+                    } catch (SQLException e) {
+                        System.out.println("Unexpected error happened" + e);
+                    }
                     isGameReady = true;
                     break;
                 case 5:

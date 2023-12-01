@@ -1,10 +1,11 @@
 package hu.nye.progTech.wumpus.model;
 
 import hu.nye.progTech.wumpus.service.Hero.HeroActions;
+import hu.nye.progTech.wumpus.service.Hero.HeroActionsInterface;
 
 import java.util.Objects;
 
-public class HeroVO implements HeroInterface {
+public class HeroVO implements HeroActionsInterface {
     private char column;
     private int row;
     private char direction;

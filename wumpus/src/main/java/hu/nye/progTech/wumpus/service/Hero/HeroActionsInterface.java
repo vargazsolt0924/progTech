@@ -1,6 +1,8 @@
-package hu.nye.progTech.wumpus.model;
+package hu.nye.progTech.wumpus.service.Hero;
 
-public interface HeroInterface {
+import hu.nye.progTech.wumpus.model.MapVO;
+
+public interface HeroActionsInterface {
 
     public void move();
 

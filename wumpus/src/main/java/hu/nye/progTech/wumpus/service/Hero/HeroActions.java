@@ -1,11 +1,10 @@
 package hu.nye.progTech.wumpus.service.Hero;
 
-import hu.nye.progTech.wumpus.model.HeroInterface;
 import hu.nye.progTech.wumpus.model.HeroVO;
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.Menu.Menu;
 
-public class HeroActions implements HeroInterface {
+public class HeroActions implements HeroActionsInterface {
 
     private MapVO mapVO;
     private Menu menu;
@@ -177,6 +176,5 @@ public class HeroActions implements HeroInterface {
     public void celebrateVictory() {
         HeroVO heroVO = mapVO.getHeroVO();
         System.out.println("Congratulations! You won with " + heroVO.getSteps() + " steps!");
-        menu.showMainMenu();
     }
 }

@@ -1,13 +1,16 @@
 package hu.nye.progTech.wumpus.service.database;
 
-import hu.nye.progTech.wumpus.model.MapVO;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import hu.nye.progTech.wumpus.model.MapVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class SaveToDatabase {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaveToDatabase.class);
 
     private Connection connection;
 
@@ -41,8 +44,8 @@ public class SaveToDatabase {
                     insertStatement.executeUpdate();
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exception) {
+            LOGGER.error("Unexpected exception: " + exception);
         }
     }
 

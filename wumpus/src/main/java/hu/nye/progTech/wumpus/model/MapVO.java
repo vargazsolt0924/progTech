@@ -3,7 +3,6 @@ package hu.nye.progTech.wumpus.model;
 import java.util.Arrays;
 import java.util.Objects;
 
-
 public class MapVO {
 
     private int size;
@@ -12,7 +11,7 @@ public class MapVO {
 
     public MapVO(int size, char[][] map, HeroVO heroVo) {
         this.size = size;
-        this.map = map;
+        this.map = map != null ? map : new char[size][size];
         this.heroVO = heroVo;
     }
 

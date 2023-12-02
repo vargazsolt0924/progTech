@@ -1,4 +1,4 @@
-package hu.nye.progTech.wumpus.service.Map;
+package hu.nye.progTech.wumpus.service.map;
 
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
@@ -49,7 +49,7 @@ class BufferedMapReaderTest {
         MapReaderException exception = assertThrows(MapReaderException.class, () -> {
             underTest.readMap();
         });
-        assertEquals("Sikertelen térkép beolvasás", exception.getMessage());
+        assertEquals("Failed read in", exception.getMessage());
     }
 
 }

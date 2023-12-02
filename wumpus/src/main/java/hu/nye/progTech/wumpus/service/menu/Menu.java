@@ -1,5 +1,4 @@
-package hu.nye.progTech.wumpus.service.Menu;
-
+package hu.nye.progTech.wumpus.service.menu;
 
 import java.util.Scanner;
 
@@ -13,7 +12,7 @@ public class Menu {
 
     public void showMainMenu() {
         System.out.println("\n==== Wumpusz Labyrinth Game ====");
-        System.out.println("1. Map editing");
+        System.out.println("1. JSON");
         System.out.println("2. Reading in from file");
         System.out.println("3. Loading from database");
         System.out.println("4. Save to database");
@@ -31,11 +30,10 @@ public class Menu {
     }
 
     public void showGameEditorMenu() {
-        System.out.println("\n==== Map Editing menu ====");
-        System.out.println("1. Map creation");
-        System.out.println("2. Add map elements");
-        System.out.println("3. Saving the created map");
-        System.out.println("4. Back to main menu");
+        System.out.println("\n==== JSON menu ====");
+        System.out.println("1. Load from JSON");
+        System.out.println("2. Save to JSON");
+        System.out.println("3. Back to main menu");
     }
 
     public int getUserChoice() {

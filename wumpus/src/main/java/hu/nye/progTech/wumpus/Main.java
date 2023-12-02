@@ -1,20 +1,28 @@
 package hu.nye.progTech.wumpus;
 
-import hu.nye.progTech.wumpus.service.database.LoadFromDatabase;
-import hu.nye.progTech.wumpus.service.database.SaveToDatabase;
-import hu.nye.progTech.wumpus.model.MapVO;
-import hu.nye.progTech.wumpus.service.Map.MapManager;
-import hu.nye.progTech.wumpus.service.Menu.Menu;
-import hu.nye.progTech.wumpus.service.Map.MapWriter;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import hu.nye.progTech.wumpus.model.MapVO;
+import hu.nye.progTech.wumpus.service.database.LoadFromDatabase;
+import hu.nye.progTech.wumpus.service.database.SaveToDatabase;
+import hu.nye.progTech.wumpus.service.json.LoadFromJson;
+import hu.nye.progTech.wumpus.service.json.SaveToJson;
+import hu.nye.progTech.wumpus.service.map.MapManager;
+import hu.nye.progTech.wumpus.service.map.MapWriter;
+import hu.nye.progTech.wumpus.service.menu.Menu;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main {
-    public static void main(String[] args) throws IOException {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+
+    public static void main(String[] args) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -24,6 +32,8 @@ public class Main {
 
         Menu menu = new Menu();
         MapVO mapVO = new MapVO();
+        LoadFromJson loadFromJson = new LoadFromJson();
+        SaveToJson saveToJson = new SaveToJson();
 
 
         boolean isGameReady = false;
@@ -36,21 +46,21 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    boolean inGameEditorMenu = true;
+                    boolean inJsonMenu = true;
                     int gameChoiceAtEditorMenu;
                     menu.showGameEditorMenu();
 
-                    while (inGameEditorMenu) {
+                    while (inJsonMenu) {
                         gameChoiceAtEditorMenu = menu.getUserChoice();
                         switch (gameChoiceAtEditorMenu) {
                             case 1:
+                                mapVO = loadFromJson.loadMapFromJson(username);
                                 break;
                             case 2:
+                                saveToJson.saveMapToJson(mapVO, username);
                                 break;
                             case 3:
-                                break;
-                            case 4:
-                                inGameEditorMenu = false;
+                                inJsonMenu = false;
                                 menu.showMainMenu();
                                 break;
                             default:
@@ -62,7 +72,8 @@ public class Main {
                     break;
                 case 2:
                     MapManager mapManager = new MapManager();
-                    File file = new File("C:\\Users\\Varga Zsolt\\IdeaProjects\\progTech\\wumpus\\src\\main\\resources\\map\\wumpuszinput.txt");
+                    File file = new File(
+                            "C:\\Users\\Varga Zsolt\\IdeaProjects\\progTech\\wumpus\\src\\main\\resources\\map\\wumpuszinput.txt");
                     InputStream inputStream = new FileInputStream(file);
                     mapVO = mapManager.readMap(inputStream);
                     MapWriter.printMapAndHeroDetails(mapVO);
@@ -73,18 +84,18 @@ public class Main {
                         try (Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/progTech", "sa", "password")) {
                             LoadFromDatabase loadFromDatabase = new LoadFromDatabase(connection);
                             loadFromDatabase.loadMapFromDb(username);
-                        } catch (SQLException e) {
-                            System.out.println("Unexpected error happened" + e);
+                        } catch (SQLException exception) {
+                            LOGGER.error("Unexpected exception: "  + exception);
                         }
                     MapWriter.printMapAndHeroDetails(mapVO);
                     isGameReady = true;
                     break;
                 case 4:
-                    try(Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/progTech", "sa", "password")) {
+                    try (Connection connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/progTech", "sa", "password")) {
                         SaveToDatabase saveToDatabase = new SaveToDatabase(connection);
                         saveToDatabase.saveMapToDb(mapVO, username);
-                    } catch (SQLException e) {
-                        System.out.println("Unexpected error happened" + e);
+                    } catch (SQLException exception) {
+                        LOGGER.error("Unexpected exception: "  + exception);
                     }
                     isGameReady = true;
                     break;
@@ -124,7 +135,7 @@ public class Main {
                             }
                         }
                     } else {
-                        System.out.println("First do map editing, read from file or load from database, but only read fromm file is available for now.");
+                        System.out.println("First do read from file or load from database!");
                     }
                     break;
                 case 6:

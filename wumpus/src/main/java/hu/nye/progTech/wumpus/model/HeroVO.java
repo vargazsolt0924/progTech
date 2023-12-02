@@ -1,16 +1,16 @@
 package hu.nye.progTech.wumpus.model;
 
-import hu.nye.progTech.wumpus.service.Hero.HeroActions;
-import hu.nye.progTech.wumpus.service.Hero.HeroActionsInterface;
-
 import java.util.Objects;
+
+import hu.nye.progTech.wumpus.service.hero.HeroActions;
+import hu.nye.progTech.wumpus.service.hero.HeroActionsInterface;
 
 public class HeroVO implements HeroActionsInterface {
     private char column;
     private int row;
     private char direction;
     private int arrows;
-    private boolean gold;
+    private boolean gold = false;
     private int startingRow;
     private char startingColumn;
     private int steps;
@@ -22,7 +22,7 @@ public class HeroVO implements HeroActionsInterface {
         this.row = row;
         this.direction = direction;
         this.arrows = arrows;
-        this.gold = false;
+        this.gold = gold;
         this.startingRow = startingRow;
         this.startingColumn = startingColumn;
         this.steps = 0;
@@ -40,7 +40,7 @@ public class HeroVO implements HeroActionsInterface {
         this.row = row;
         this.direction = direction;
         this.arrows = arrows;
-        this.gold = false;
+        this.gold = gold;
         this.startingRow = startingRow;
         this.startingColumn = startingColumn;
     }

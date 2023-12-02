@@ -1,12 +1,11 @@
-package hu.nye.progTech.wumpus.service.Map;
-
-import hu.nye.progTech.wumpus.model.HeroVO;
-import hu.nye.progTech.wumpus.model.MapVO;
-import hu.nye.progTech.wumpus.service.exception.MapReaderException;
+package hu.nye.progTech.wumpus.service.map;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import hu.nye.progTech.wumpus.model.HeroVO;
+import hu.nye.progTech.wumpus.model.MapVO;
+import hu.nye.progTech.wumpus.service.exception.MapReaderException;
 
 public class BufferedMapReader implements MapReaderInterface {
 
@@ -23,7 +22,7 @@ public class BufferedMapReader implements MapReaderInterface {
             String[] firstLineParts = firstLine.split(" ");
 
             if (firstLineParts.length != 4) {
-                throw new MapReaderException("Hibás első sor formátum: " + firstLine);
+                throw new MapReaderException("Incorrect first line format: " + firstLine);
             }
 
             int size = Integer.parseInt(firstLineParts[0]);
@@ -52,7 +51,7 @@ public class BufferedMapReader implements MapReaderInterface {
             return mapVO;
 
         } catch (IOException e) {
-            throw new MapReaderException("Sikertelen térkép beolvasás");
+            throw new MapReaderException("Failed read in");
         }
     }
 }

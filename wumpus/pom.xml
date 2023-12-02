@@ -40,7 +40,40 @@
             <artifactId>h2</artifactId>
             <version>1.4.200</version>
         </dependency>
+
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>3.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.16.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230618</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -90,8 +123,10 @@
                     <excludes>
                         <exclude>**/model/*</exclude>
                         <exclude>hu/nye/progTech/wumpus/Main.*</exclude>
-                        <exclude>**/service/Menu/*</exclude>
+                        <exclude>**/service/menu/*</exclude>
                         <exclude>**/service/database/*</exclude>
+                        <exclude>**/service/exception/*</exclude>
+                        <exclude>**/service/json/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

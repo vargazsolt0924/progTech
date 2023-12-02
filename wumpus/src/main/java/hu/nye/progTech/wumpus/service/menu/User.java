@@ -1,4 +1,4 @@
-package hu.nye.progTech.wumpus.service.Menu;
+package hu.nye.progTech.wumpus.service.menu;
 
 public class User {
 
@@ -14,6 +14,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "Felhasználó neve: " + username;
+        return "Username: " + username;
     }
 }

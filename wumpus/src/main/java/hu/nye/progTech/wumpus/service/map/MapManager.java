@@ -1,18 +1,16 @@
-package hu.nye.progTech.wumpus.service.Map;
+package hu.nye.progTech.wumpus.service.map;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 public class MapManager {
-    private static final Logger logger = LoggerFactory.getLogger(MapManager.class);
-
-    private MapVO mapVO;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapManager.class);
 
     public MapVO readMap(InputStream inputStream) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -20,8 +18,8 @@ public class MapManager {
 
         try {
             return mapReader.readMap();
-        } catch (MapReaderException e) {
-            logger.error("Valami hiba történt a pálya beolvasás közben!", e);
+        } catch (MapReaderException exception) {
+            LOGGER.error("Something went wrong while reading the map!", exception);
             return null;
         }
     }
@@ -30,7 +28,7 @@ public class MapManager {
         if (mapVO != null) {
             MapWriter.mapPrinter(mapVO);
         } else {
-            System.out.println("Hiba történt a pálya beolvasása közben.");
+            System.out.println("An error occurred while reading the map.");
         }
     }
 

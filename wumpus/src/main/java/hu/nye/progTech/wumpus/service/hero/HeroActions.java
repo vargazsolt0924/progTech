@@ -1,8 +1,8 @@
-package hu.nye.progTech.wumpus.service.Hero;
+package hu.nye.progTech.wumpus.service.hero;
 
 import hu.nye.progTech.wumpus.model.HeroVO;
 import hu.nye.progTech.wumpus.model.MapVO;
-import hu.nye.progTech.wumpus.service.Menu.Menu;
+import hu.nye.progTech.wumpus.service.menu.Menu;
 
 public class HeroActions implements HeroActionsInterface {
 
@@ -21,6 +21,7 @@ public class HeroActions implements HeroActionsInterface {
     public void move() {
         HeroVO heroVO = mapVO.getHeroVO();
         char[][] map = mapVO.getMap();
+        if (map != null && heroVO != null) {
         int oldColumn = heroVO.getColumn();
         int oldRow = heroVO.getRow();
 
@@ -70,8 +71,12 @@ public class HeroActions implements HeroActionsInterface {
             map[heroVO.getRow() - 1][heroVO.getColumn()] = 'H';
             heroVO.setSteps(heroVO.getSteps() + 1);
         }
-        celebrateVictory();
-
+        if (heroVO.isGold() && heroVO.getRow() == heroVO.getStartingRow() && heroVO.getColumn() == heroVO.getStartingColumn()) {
+            celebrateVictory();
+        }
+        } else {
+            System.out.println("Error: Map or HeroVO is null");
+        }
     }
 
     @Override
@@ -118,7 +123,12 @@ public class HeroActions implements HeroActionsInterface {
     public void shoot(MapVO mapVO) {
         HeroVO heroVO = mapVO.getHeroVO();
         char[][] map = mapVO.getMap();
-        int wumpusRow = -1, wumpusColumn = -1;
+        if (map == null) {
+            System.out.println("Error: Map is null");
+            return;
+        }
+        int wumpusRow = -1;
+        int wumpusColumn = -1;
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[0].length; j++) {
@@ -160,6 +170,7 @@ public class HeroActions implements HeroActionsInterface {
                         heroVO.setArrows(heroVO.getArrows() - 1);
                     }
                     break;
+                default:
             }
         } else {
             System.out.println("You don't have any arrows to shoot!");

@@ -1,4 +1,4 @@
-package hu.nye.progTech.wumpus.service.Map;
+package hu.nye.progTech.wumpus.service.map;
 
 import hu.nye.progTech.wumpus.model.MapVO;
 import hu.nye.progTech.wumpus.service.exception.MapReaderException;

@@ -1,4 +1,4 @@
-package hu.nye.progTech.wumpus.service.Map;
+package hu.nye.progTech.wumpus.service.map;
 
 import hu.nye.progTech.wumpus.model.HeroVO;
 import hu.nye.progTech.wumpus.model.MapVO;
@@ -35,7 +35,7 @@ public class MapWriter {
         }
         MapWriter.mapPrinter(map);
         HeroVO heroVO = map.getHeroVO();
-        if (heroVO == null){
+        if (heroVO == null) {
             System.out.println("hero is null");
             return;
         }

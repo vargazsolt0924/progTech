@@ -44,3 +44,24 @@ A nézetek lekérdezik a friss adatokat a modeltől és frissítik magukat.
    Az a céja, hogy kérést csomagol egy objektumba, így paraméterezhető, sorban állítható vagy naplózható. Pl: Menürendszer parancsok kezelése.
 8. Proxy Tervezési Minta:
    Célja, hogy hozzáférést kontrollál egy objektumhoz, létrehozva egy közvetítő objektumot. Pl: Hálózati proxy a távoli erőforrásokhoz.
+9. State Tervezési Minta:
+   Célja, hogy egy objektum viselkedését attól függően változtassa meg, hogy belső állapota hogyan változik. Pl: Játékállapotok kezelése. 
+10. Builder Tervezési Minta:
+    Segít egy összetett objektum létrehozásában lépésről lépésre. Pl: Konfigurálható objektumok vagy összetett dokumentumok építése. 
+11. Chain of Responsibility Tervezési Minta:
+    Lehetővé teszi, hogy több objektum kezelje a kérést anélkül, hogy pontosan tudnánk, melyik fogja kezelni. Pl: Eseménykezelési láncok. 
+12. Visitor Tervezési Minta:
+    Célja, hogy egy új műveletet adjon hozzá egy objektum hierarchiához anélkül, hogy módosítanánk az osztályokat. Pl: Különböző formátumú dokumentumok exportálása. 
+13. Composite Tervezési Minta:
+    Lehetővé tesz egy összetett objektum kezelését úgy, mintha az egyedi elemek lennének. Pl: Grafikus elemek csoportosítása.
+14. Template Method Tervezési Minta:
+    Meghatározza egy algoritmus vázát, de a részleteket az leszármazottakra bízza. Pl: Osztályok közötti hasonló működés kialakítása. 
+15. Flyweight Tervezési Minta:
+    Célja, hogy több hasonló objektumnak osszák meg a részleteit, így csökkentve a memóriaigényt. Pl: Szövegkarakterek újrafelhasználása egy szöveg szerkesztőben.  
+16. Interpreter Tervezési Minta:
+    Egy nyelvet értelmez, és lehetővé teszi, hogy az alkalmazásban definiált nyelvi elemeket használjunk. Pl: Matematikai kifejezések kiértékelése. 
+17. Mediator Tervezési Minta:
+    Célja, hogy közvetítse a kommunikációt több objektum között, így azok nem közvetlenül egymással kommunikálnak. Pl: Chat alkalmazásban üzenetek közvetítése. 
+18. Memento Tervezési Minta:
+    Célja, hogy egy objektum belső állapotát tárolja és helyreállítsa később. Pl: Undo/Redo műveletek kezelése.
+
